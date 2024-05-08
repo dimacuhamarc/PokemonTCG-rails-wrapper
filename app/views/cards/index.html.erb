@@ -1,0 +1,36 @@
+<h1 class="heading">What a surprise, huh?</h1>
+<h2 class="results">There are currently <%= @cards.count %> cards.</h2>
+
+<% if @cards.present? %>
+  <table class="card-table">
+    <thead>
+      <tr>
+        <th class="card-image">Image</th>
+        <th class="card-name">Name</th>
+        <th class="card-rarity">Rarity</th>
+        <th class="card-hp">HP</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cards.each do |card| %>
+        <tr class="card-row">
+          <td class="card-image">
+            <% hires_photos = card['images'].select { |_, url| url.include?('hires') }.values %>
+            <% if hires_photos.present? %>
+              <% hires_photos.each do |photo| %>
+                <%= image_tag(photo, class: "pokemon-image") %>
+              <% end %>
+            <% else %>
+              <p class="no-photo">No high-resolution photo available.</p>
+            <% end %>
+          </td>
+          <td class="card-name"><%= card['name'] %></td>
+          <td class="card-rarity"><%= card['rarity'] %></td>
+          <td class="card-hp"><%= card['hp'] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="no-cards">No cards found.</p>
+<% end %>

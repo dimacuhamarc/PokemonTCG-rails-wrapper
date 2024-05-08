@@ -20,6 +20,11 @@ module Pokemontcg
         end
       end
 
+      def get_all_cards
+        response = @client.get('cards', { 'X-Api-Key': API_KEY })
+        handle_response(response)
+      end
+
       def get_card_by_name(name)
         response = @client.get("cards?q=name:#{name}", { 'X-Api-Key': API_KEY })
         handle_response(response)
@@ -28,11 +33,7 @@ module Pokemontcg
       private
 
       def handle_response(response)
-        if response.success?
-          JSON.parse(response.body)
-        else
-          raise Error, "Error: #{ERROR_CODES[response.status]} - #{response.body}"
-        end
+        JSON.parse(response.body)
       end
     end
   end
