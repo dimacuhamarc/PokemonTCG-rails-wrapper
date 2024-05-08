@@ -14,7 +14,8 @@
 }
 
 .card-image {
-  text-align: center;
+  text-align: center !important;
+  width: 30vh !important;
 }
 
 .pokemon-image {
@@ -57,8 +58,9 @@
 .card-table th,
 .card-table td {
   border: 1px solid #dddddd;
-  text-align: center;
+  text-align: left;
   padding: 8px;
+  width: fit-content;
 }
 
 .card-row:nth-child(even) {
@@ -84,5 +86,5 @@
 }
 
 :root {
-  text-align: center;
+  text-align: left;
 }

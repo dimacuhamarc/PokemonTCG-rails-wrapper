@@ -9,9 +9,9 @@
     <thead>
       <tr>
         <th class="card-image">Image</th>
+        <th class="card-rarity">Card Rules</th>
         <th class="card-name">Name</th>
-        <th class="card-rarity">Rarity</th>
-        <th class="card-hp">HP</th>
+        <th class="card-name">Attacks</th>
       </tr>
     </thead>
     <tbody>
@@ -27,9 +27,33 @@
               <p class="no-photo">No high-resolution photo available.</p>
             <% end %>
           </td>
-          <td class="card-name"><%= card['name'] %></td>
-          <td class="card-rarity"><%= card['rarity'] %></td>
-          <td class="card-hp"><%= card['hp'] %></td>
+          <td class="card-name">
+            <% if card['rules'].present? %>
+              <ul class="rules">
+                <% card['rules'].each do |rule| %>
+                  <p class="rule"><%= rule %></p>
+                <% end %>
+              </ul>
+            <% else %>
+              <p class="no-rules">
+                No rules available.
+              </p>
+            <% end %>
+          </td>
+          <td class="card-name"><%= card['name'] %> <%= card['hp'] %> <%= card['rarity'] %></td>
+          <td class="card-name">
+            <% if card['attacks'].present? %>
+              <ul class="attacks">
+                <% card['attacks'].each do |attack| %>
+                  <p class="attack-name"><%= attack['name'] %></p>
+                  <p class="attack-cost"><%= attack['cost'] %></p>
+                  <p class="attack-text"><%= attack['text'] %></p>
+                <% end %>
+              </ul>
+            <% else %>
+              <p class="no-attacks">No attacks available.</p>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
